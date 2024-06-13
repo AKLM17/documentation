@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Crawler Settings</title>
+    <style>
+        body {
+            background-color: #1e1e1e;
+            color: #d4d4d4;
+            font-family: 'Consolas', 'Courier New', monospace;
+            line-height: 1.6;
+            padding: 20px;
+        }
+        h1, h2, h3, h4, h5, h6 {
+            color: #569cd6;
+        }
+        a {
+            color: #dcdcaa;
+            text-decoration: none;
+        }
+        a:hover {
+            text-decoration: underline;
+        }
+        code, pre {
+            background-color: #2d2d2d;
+            color: #dcdcdc;
+            padding: 5px;
+            border-radius: 3px;
+        }
+        pre {
+            overflow-x: auto;
+        }
+        blockquote {
+            border-left: 5px solid #007acc;
+            padding-left: 10px;
+            color: #d7ba7d;
+        }
+        ul, ol {
+            margin-left: 20px;
+        }
+        img {
+            max-width: 100%;
+            height: auto;
+            border: 1px solid #555;
+        }
+        .info {
+            background-color: #252526;
+            padding: 10px;
+            border-left: 5px solid #007acc;
+        }
+        .danger {
+            background-color: #252526;
+            padding: 10px;
+            border-left: 5px solid #f44747;
+        }
+        .tip {
+            background-color: #252526;
+            padding: 10px;
+            border-left: 5px solid #d7ba7d;
+        }
+        .note {
+            background-color: #252526;
+            padding: 10px;
+            border-left: 5px solid #569cd6;
+        }
+    </style>
+</head>
+<body>
+    <h1>Crawler Settings</h1>
+    <p>Adjust the crawler settings if you notice missing, unwanted, or duplicate pages after setting up a crawler for your site or sitemap. It can also speed up the crawling process.</p>
+    <p>To access the settings, log in to Search Studio and go to <strong>Data Sources &gt; Website Crawling</strong>.</p>
+    <img src="../../img/crawler_settings.png" alt="Crawler settings">
+    <h3>Root URLs</h3>
+    <p>Root URLs are the starting points for the crawler.</p>
+    <p>Enter full base URLs - such as a homepage or a specific directory, from where the crawler will begin its operation. For example: <code>https://zoovu.com</code>.</p>
+    <ul>
+        <li><strong>Crawl Subdomains:</strong> Activate this if you want a comprehensive crawl that includes any subdomain associated with your main site.</li>
+        <li><strong>Auto Re-Index:</strong> Enabling this feature will allow the crawler to automatically re-index the site. Activate this if you want your search results to remain up-to-date with the latest website content.</li>
+        <li><strong>Deduplication:</strong> Activate the following settings to avoid the indexing of duplicate content:
+            <ul>
+                <li><strong>Use Canonical URL:</strong> When enabled, the crawler uses the canonical URL provided in the page links as the primary URL, which helps in handling duplicate content.</li>
+                <li><strong>Ignore Query Parameters:</strong> This setting makes the crawler ignore URL query parameters that don't affect the content of the pages (e.g., session IDs or tracking codes).</li>
+                <li><strong>Lowercase All URLs:</strong> This setting standardizes all URLs to lowercase, which prevents the indexing of the same URL in different cases as different pages.</li>
+                <li><strong>Remove Trailing Slashes:</strong> A trailing slash is the forward slash <code>/</code> placed at the end of a URL. Enabling this option will help standardize URL format across your site’s indexing.</li>
+            </ul>
+        </li>
+        <li><strong>Replace Parts in URL:</strong> If you want to standardize your URLs, you can define what should be removed or replaced.
+            <ul>
+                <li><strong>Pattern:</strong> Define the pattern (using regular expressions) that you want to replace in the URL, e.g., <code>\\tag\\</code>.</li>
+                <li><strong>Replacement:</strong> Write the string that should replace the identified pattern. (It can also be left empty if removal is the only goal.)</li>
+            </ul>
+        </li>
+    </ul>
+    <h2>Blacklisting, Whitelisting, No-index rules</h2>
+    <p>If you want to remove specific pages or documents from your search results (without deleting them from your website), you can apply blacklisting, whitelisting, or no-index rules.</p>
+    <div class="info">
+        <p>URL and XPath patterns are interpreted as regular expressions so remember to put a backslash <code>\</code> before special characters, such as <code>[]\^$.|?*+(){}</code>.</p>
+    </div>
+    <p>To access these settings, go to <strong>Search Studio &gt; Data Sources &gt; Website Crawling</strong> and click on <strong>"Create first rule"</strong>.</p>
+    <img src="../../img/blacklist_and_whitelisting.png" alt="No-index URL patterns">
+    <h4>Blacklist URL patterns</h4>
+    <p>These patterns tell the crawler to completely <strong>ignore specific areas of your site</strong> or even types of documents.</p>
+    <img src="../../img/blacklist_url_pattern.png" alt="Blacklist URL patterns">
+    <p>In this example, pages found under <code>/wp-admin/</code> or <code>.php pages</code> will not be indexed, and the crawler will not follow any links found on those pages either. The crawler will also not index any PDFs.</p>
+    <div class="info">
+        <p>Blacklisting takes priority over whitelisting. If there's a conflict in your settings, the whitelisted patterns will be ignored.</p>
+    </div>
+    <h4>Whitelist URL patterns</h4>
+    <p>These patterns restrict the crawler to a specific area of your site.</p>
+    <p>For example, imagine you want to limit your search to blog pages only. If you whitelist <code>/blog/</code>, our crawler won't index anything except for the URLs containing <code>/blog/</code>.</p>
+    <p>This can also be useful for multilingual sites. Depending on your URL structure, you could, for instance, use the following patterns to limit the search to French-language pages only:</p>
+    <img src="../../img/whitelist_url_pattern.png" alt="Whitelist URL patterns">
+    <div class="danger">
+        <p>Make sure that your root URL matches your whitelisting pattern (e.g., <code>https://website.com/fr/</code>). If the root URL doesn't contain the whitelist pattern, it will be blacklisted (which means nothing can be indexed, and there can be no search results).</p>
+    </div>
+    <h4>No-index URL patterns</h4>
+    <p>These patterns have the same effect as the "noindex,follow" robots meta tag: the crawler follows the page and all the outgoing links, but doesn't include the no-indexed page in the results. (It is different from blacklisting, where the crawler fully ignores the page without checking it for other useful links.)</p>
+    <div class="tip">
+        <p>Set up no-index patterns for pages that should not be in your search results, but contain links to important pages. For example, you could exclude your Blog landing page, but index all your blog posts, or exclude "tag" pages, but index the tagged posts.</p>
+    </div>
+    <img src="../../img/no_index_url_patterns.png" alt="No-index URL patterns">
+    <p>Note the <code>$</code> sign: it indicates where the matching pattern should stop. In this case, URLs linking from the escaped page, such as <code>/specific-url-to-ignore/product1</code>, will still be followed, indexed, and shown in search results.</p>
+    <div class="info">
+        <p>No-index URL patterns take priority over whitelisting. If there's a conflict in your settings, the whitelisted patterns will be ignored.</p>
+    </div>
+    <h4>No-index XPaths</h4>
+    <p>Sometimes you need to no-index <strong>pages that don't share any specific URL patterns</strong>. Instead of adding every URL one by one to the no-index URL patterns, check if you can no-index them based on a specific CSS class or ID.</p>
+    <p>If you have category pages for your products, and you want to hide them from the search results while still crawling your products. If those category pages have a distinct element which isn't used elsewhere, e.g. <code>&lt;div class="product-grid"&gt;&lt;/div&gt;</code>, you can add it as a No-Index XPath: <code>//div[@class="product-grid"]</code>.</p>
+    <img src="../../img/no_index_xpaths.png" alt="No-index Xpaths">
+    <p>In this case, the crawler would go to the category pages, then follow and index all the outgoing URLs, so your product pages will get indexed and shown in the results. If you need help with XPaths, check out this guide or reach out to support.</p>
+    <div class="note">
+        <p>Using a lot of no-index URL patterns or no-index XPaths slows down the indexing process, as the crawler needs to scan every page and check it against all the indexing rules. If you're sure that a page or a directory with all outgoing links can be safely excluded from indexing, use the blacklist URL pattern feature instead.</p>
+    </div>
+    <h4>Whitelist XPaths</h4>
+    <p>Similar to whitelist URL patterns, whitelisting by XPath restricts the crawler to a specific area of your site.</p>
+    <p>If you want to limit your search to specific pages, but they do not share any URL pattern, then the whitelist XPaths option will come in handy.</p>
+    <p>For example, the following XPath limits the search to Russian-language pages only:</p>
+    <img src="../../img/whitelist_xpaths.png" alt="Whitelist Xpaths">
+    <div class="note">
+        <p>"Whitelist XPath" takes priority over no-index XPath. If there's a conflict in your settings, the no-index XPaths will be ignored.</p>
+    </div>
+</body>
+</html>
