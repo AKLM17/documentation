@@ -70,7 +70,7 @@
     <h1>Crawler Settings</h1>
     <p>Adjust the crawler settings if you notice missing, unwanted, or duplicate pages after setting up a crawler for your site or sitemap. It can also speed up the crawling process.</p>
     <p>To access the settings, log in to Search Studio and go to <strong>Data Sources &gt; Website Crawling</strong>.</p>
-    <img src="../../img/crawler_settings.png" alt="Crawler settings">
+    <img src="crawler_settings.png" alt="Crawler settings">
     <h3>Root URLs</h3>
     <p>Root URLs are the starting points for the crawler.</p>
     <p>Enter full base URLs - such as a homepage or a specific directory, from where the crawler will begin its operation. For example: <code>https://zoovu.com</code>.</p>
@@ -98,10 +98,10 @@
         <p>URL and XPath patterns are interpreted as regular expressions so remember to put a backslash <code>\</code> before special characters, such as <code>[]\^$.|?*+(){}</code>.</p>
     </div>
     <p>To access these settings, go to <strong>Search Studio &gt; Data Sources &gt; Website Crawling</strong> and click on <strong>"Create first rule"</strong>.</p>
-    <img src="../../img/blacklist_and_whitelisting.png" alt="No-index URL patterns">
+    <img src="blacklist_and_whitelisting.png" alt="No-index URL patterns">
     <h4>Blacklist URL patterns</h4>
     <p>These patterns tell the crawler to completely <strong>ignore specific areas of your site</strong> or even types of documents.</p>
-    <img src="../../img/blacklist_url_pattern.png" alt="Blacklist URL patterns">
+    <img src="blacklist_url_pattern.png" alt="Blacklist URL patterns">
     <p>In this example, pages found under <code>/wp-admin/</code> or <code>.php pages</code> will not be indexed, and the crawler will not follow any links found on those pages either. The crawler will also not index any PDFs.</p>
     <div class="info">
         <p>Blacklisting takes priority over whitelisting. If there's a conflict in your settings, the whitelisted patterns will be ignored.</p>
@@ -110,7 +110,7 @@
     <p>These patterns restrict the crawler to a specific area of your site.</p>
     <p>For example, imagine you want to limit your search to blog pages only. If you whitelist <code>/blog/</code>, our crawler won't index anything except for the URLs containing <code>/blog/</code>.</p>
     <p>This can also be useful for multilingual sites. Depending on your URL structure, you could, for instance, use the following patterns to limit the search to French-language pages only:</p>
-    <img src="../../img/whitelist_url_pattern.png" alt="Whitelist URL patterns">
+    <img src="whitelist_url_pattern.png" alt="Whitelist URL patterns">
     <div class="danger">
         <p>Make sure that your root URL matches your whitelisting pattern (e.g., <code>https://website.com/fr/</code>). If the root URL doesn't contain the whitelist pattern, it will be blacklisted (which means nothing can be indexed, and there can be no search results).</p>
     </div>
@@ -119,7 +119,7 @@
     <div class="tip">
         <p>Set up no-index patterns for pages that should not be in your search results, but contain links to important pages. For example, you could exclude your Blog landing page, but index all your blog posts, or exclude "tag" pages, but index the tagged posts.</p>
     </div>
-    <img src="../../img/no_index_url_patterns.png" alt="No-index URL patterns">
+    <img src="no_index_url_patterns.png" alt="No-index URL patterns">
     <p>Note the <code>$</code> sign: it indicates where the matching pattern should stop. In this case, URLs linking from the escaped page, such as <code>/specific-url-to-ignore/product1</code>, will still be followed, indexed, and shown in search results.</p>
     <div class="info">
         <p>No-index URL patterns take priority over whitelisting. If there's a conflict in your settings, the whitelisted patterns will be ignored.</p>
@@ -127,7 +127,7 @@
     <h4>No-index XPaths</h4>
     <p>Sometimes you need to no-index <strong>pages that don't share any specific URL patterns</strong>. Instead of adding every URL one by one to the no-index URL patterns, check if you can no-index them based on a specific CSS class or ID.</p>
     <p>If you have category pages for your products, and you want to hide them from the search results while still crawling your products. If those category pages have a distinct element which isn't used elsewhere, e.g. <code>&lt;div class="product-grid"&gt;&lt;/div&gt;</code>, you can add it as a No-Index XPath: <code>//div[@class="product-grid"]</code>.</p>
-    <img src="../../img/no_index_xpaths.png" alt="No-index Xpaths">
+    <img src="no_index_xpaths.png" alt="No-index Xpaths">
     <p>In this case, the crawler would go to the category pages, then follow and index all the outgoing URLs, so your product pages will get indexed and shown in the results. If you need help with XPaths, check out this guide or reach out to support.</p>
     <div class="note">
         <p>Using a lot of no-index URL patterns or no-index XPaths slows down the indexing process, as the crawler needs to scan every page and check it against all the indexing rules. If you're sure that a page or a directory with all outgoing links can be safely excluded from indexing, use the blacklist URL pattern feature instead.</p>
@@ -136,7 +136,7 @@
     <p>Similar to whitelist URL patterns, whitelisting by XPath restricts the crawler to a specific area of your site.</p>
     <p>If you want to limit your search to specific pages, but they do not share any URL pattern, then the whitelist XPaths option will come in handy.</p>
     <p>For example, the following XPath limits the search to Russian-language pages only:</p>
-    <img src="../../img/whitelist_xpaths.png" alt="Whitelist Xpaths">
+    <img src="whitelist_xpaths.png" alt="Whitelist Xpaths">
     <div class="note">
         <p>"Whitelist XPath" takes priority over no-index XPath. If there's a conflict in your settings, the no-index XPaths will be ignored.</p>
     </div>
